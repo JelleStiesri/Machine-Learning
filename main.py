@@ -1,4 +1,3 @@
-from Input_perceptron import *
 from Perceptron import *
 from PerceptronLayer import *
 from PerceptronNetwork import *
@@ -84,46 +83,46 @@ def NetworkTest_XOR():
 def NetworkTest_ADDER():
 
     # Laag 1
-    p1 = Perceptron('P2', -1, [1, 0])
-    p2 = Perceptron('P1 [AND]', -1, [0.5, 0.5])
+    p1 = Perceptron('P1', -1, [1, 0])
+    p2 = Perceptron('P2 [AND]', -1, [0.5, 0.5])
     p3 = Perceptron('P3', -1, [0, 1])
-    layer1 = PerceptronLayer('Laag-1 [Hidden]', [p1, p2, p3])
+    layer1 = PerceptronLayer('Layer-1 [Hidden]', [p1, p2, p3])
 
     # Laag 2
     p4 = Perceptron('P4', -1, [1, 0, 0])
     p5 = Perceptron('P5 [NOT]', 0.5, [0, -1, 0])
     p6 = Perceptron('P6', -1, [0, 0, 1])
-    layer2 = PerceptronLayer('Laag-2 [Hidden]', [p4, p5, p6])
+    layer2 = PerceptronLayer('Layer-2 [Hidden]', [p4, p5, p6])
 
     # Laag 3
     p7 = Perceptron('P7 [AND]', -1, [0.5, 0.5, 0])
     p8 = Perceptron('P8 [AND]', -1, [0, 0.5, 0.5])
     p9 = Perceptron('P9', -1, [0, 1, 0])
-    layer3 = PerceptronLayer('Laag-2 [Hidden]', [p7, p8, p9])
+    layer3 = PerceptronLayer('Layer-3 [Hidden]', [p7, p8, p9])
 
     # Laag 4
     p10 = Perceptron('P10 [NOT]', 0.5, [-1, 0, 0])
     p11 = Perceptron('P11 [NOT]', 0.5, [0, -1, 0])
     p12 = Perceptron('P12', -1, [0, 0, 1])
-    layer4 = PerceptronLayer('Laag-2 [Hidden]', [p10, p11, p12])
+    layer4 = PerceptronLayer('Layer-4 [Hidden]', [p10, p11, p12])
 
     # Laag 5
     p13 = Perceptron('P13 [AND]', -1, [0.5, 0.5, 0])
     p14 = Perceptron('P14 [AND??]', -1, [0, 0, 1])
-    layer5 = PerceptronLayer('Laag-2 [Hidden]', [p13, p14])
+    layer5 = PerceptronLayer('Layer-5 [Hidden]', [p13, p14])
 
     # Laag 6
     p15 = Perceptron('P15 [NOT]', 0.5, [-1, 0])
     p16 = Perceptron('P16 [NOT]', 0.5, [0, -1])
-    layer6 = PerceptronLayer('Laag-2 [Hidden]', [p15, p16])
-
+    layer6 = PerceptronLayer('Layer-6 [Output]', [p15, p16])
 
     network = PerceptronNetwork([layer1, layer2, layer3, layer4, layer5, layer6])
 
     input_list = [True, True]
-
     output = network.feed_forward(input_list)
-    print(output)
+
+    print(network)
+    print('Output: ', output)
     print(f'Carry: {int(output[1])} - Sum: {int(output[0])}')
 
 
