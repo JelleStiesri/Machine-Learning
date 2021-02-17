@@ -14,23 +14,10 @@ class Perceptron:
         for index in range(len(inputs)):  # Loop door indexen van de input lijst heen
             weighted_sum += inputs[index] * self.weights[index]  # Voegt de input waarde*Gewicht toe aan som
 
-        """Hieronder maak ik een string waarin de berekening van de gewogen som laat zien. Kon geen betere plek
-        vinden omdat de __str__ functie geen parameters kan hebben en ik de inputs niet als atribuut mag opslaan"""
-        string = '\n'
-        string += f'Input: {inputs} \n'
-        for item in range(len(inputs)):
-            string += f'{int(inputs[item])}*{self.weights[item]}' # Voegt elke input + weight toe aan string
-            if item == len(inputs)-1:
-                string += f' + {self.bias}(bias) = '
-            else:
-                string += ' + '
-        string += f'{weighted_sum}\n'
-        print(string)
-
         return weighted_sum + self.bias >= 0  # Returnt 1 = True als het getal boven 0 komt.
 
     def __str__(self):
         return f'<{self.name} port>\n' \
                f'- Bias = {self.bias}\n' \
-               f'- Weights = {self.weights}'
-
+               f'- Weights = {self.weights}\n'
+    

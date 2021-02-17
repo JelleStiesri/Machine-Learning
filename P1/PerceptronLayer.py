@@ -9,7 +9,8 @@ class PerceptronLayer:
 
         for perceptron in self.perceptrons:
             """Voer de activatiefunctie uit in elke perceptron in de laag"""
-            print(perceptron)
+            if len(self.perceptrons) == 1:
+                return perceptron.activation(inputs)
             output.append(perceptron.activation(inputs))  # append de output van de perceptron
 
         return output
@@ -18,3 +19,4 @@ class PerceptronLayer:
         return f'----------------------------------------\n'\
                f'<{self.name}> ' \
                f'- Deze layer bestaat uit {len(self.perceptrons)} Perceptrons\n'
+    
