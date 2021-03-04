@@ -4,6 +4,7 @@ class NeuronLayer:
         self.name = name
         self.neurons = neurons
 
+
     def activate(self, inputs):
         output = []
 

@@ -7,6 +7,7 @@ class Neuron:
         self.bias = bias
         self.weights = weights
 
+
     def activation(self, inputs: list):
         """Dit is de activatiefunctie, hierin word de output van de neuron berekend.
         Hiervoor maken we eerst een gewogen som van alle inputs en voegen hier de bias aan toe.
