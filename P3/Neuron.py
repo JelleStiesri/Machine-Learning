@@ -19,6 +19,7 @@ class Neuron:
 
         return 1 / (1 + e ** -weighted_sum)
 
+
     def error(self, expectations: ([], bool)):
         """Berekent de totale error over alle trainingsvoorbeelden
         Formule: MSE = Σ | d – y |2 / n"""
@@ -26,8 +27,7 @@ class Neuron:
         for input_list, expectation in expectations:
             error += (expectation - self.activation(input_list))**2
 
-        print(f'\n'
-              f'Error: {error / len(expectations)}')
+        return error / len(expectations)
 
 
     def __str__(self):
