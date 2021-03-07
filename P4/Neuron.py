@@ -1,8 +1,9 @@
 from math import e
+from typing import List
 
 class Neuron:
 
-    def __init__(self, name: str, bias: float, weights: list[float]):
+    def __init__(self, name: str, bias: float, weights: List[float]):
         self.name = name
         self.bias = bias
         self.weights = weights
@@ -20,15 +21,20 @@ class Neuron:
 
         return self.sigmoid(weighted_sum)
 
+    def error(self, expectation: ([], bool)): # OF FLOAT/BOOL
+        for input_list, target in expectation:
+            print(input_list, target)
+            # derivative =
 
-    def error(self, expectations: ([], bool)):
-        """Berekent de totale error over alle trainingsvoorbeelden
-        Formule: MSE = Σ | d – y |2 / n"""
-        error = 0
-        for input_list, expectation in expectations:
-            error += (expectation - self.activation(input_list))**2
 
-        return error / len(expectations)
+    # def error(self, expectations: ([], bool)):
+    #     """Berekent de totale error over alle trainingsvoorbeelden
+    #     Formule: MSE = Σ | d – y |2 / n"""
+    #     error = 0
+    #     for input_list, expectation in expectations:
+    #         error += (expectation - self.activation(input_list))**2
+    #
+    #     return error / len(expectations)
 
 
     def __str__(self):

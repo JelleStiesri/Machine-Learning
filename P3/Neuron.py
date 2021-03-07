@@ -1,8 +1,9 @@
 from math import e
+from typing import List
 
 class Neuron:
 
-    def __init__(self, name: str, bias: float, weights: list[float]):
+    def __init__(self, name: str, bias: float, weights: List[float]):
         self.name = name
         self.bias = bias
         self.weights = weights

@@ -1,6 +1,8 @@
+from typing import List
+
 class Perceptron:
 
-    def __init__(self, name: str, bias: float, weights: list[float]):
+    def __init__(self, name: str, bias: float, weights: List[float]):
         self.name = name  # Naam heeft geen functionele waarde, is alleen voor overzicht
         self.bias = bias
         self.weights = weights
