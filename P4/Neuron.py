@@ -1,17 +1,18 @@
 from math import e
 from typing import List
 
+
 class Neuron:
 
-    def __init__(self, name: str, bias: float, weights: List[float]):
+    def __init__(self, name: str, neuron_type: str, bias: float, weights: List[float]):
         self.error = None
         self.name = name
+        self.neuron_type = neuron_type
         self.bias = bias
         self.weights = weights
 
     def sigmoid(self, weighted_sum: float):
         return 1 / (1 + e ** -weighted_sum)
-
 
     def activation(self, inputs: list):
         """Dit is de activatiefunctie, hierin word de output van de neuron berekend.
@@ -23,36 +24,18 @@ class Neuron:
 
         return self.sigmoid(weighted_sum)
 
-
-    def calculate_error(self, output: float,  target: float):
-        derivative = output * (1 - output)
-        error = derivative * -(target - output)
+    def calculate_error(self, output: float, target: float):
+        derivative = output * (1 - output)  # σ'(inputj) = σ(inputj) ∙ (1 – σ(inputj)) = outputj ∙ (1 – outputj)
+        error = derivative * -(target - output)  # Δj = σ'(inputj) ∙ –(targetj – outputj)
 
         self.error = error
+
     def update(self, output: float, learning_rate: float = 0.1):
-        self.bias -= (learning_rate*self.error)
+        self.bias -= (learning_rate * self.error)  # Δbj = η ∙ Δj
         for i in range(len(self.weights)):
-            self.weights[i] -= (learning_rate * output * self.error)
-
-
-
-    # def update(self, expectations: [[], bool]):
-    #     for input_list, expectation in expectations:
-    #         output = self.activation(input_list)
-    #         print(f'input: {input_list, expectation} --- Output: {output}')
-    #
-    #         self.calculate_error(output, expectation)
-    #         print(f'Error: {self.error}')
-    #
-    #         gradient = output * self.error
-    #         print(f'Gradient: {gradient}')
-    #
-    #
-    #         print("\n")
+            self.weights[i] -= (learning_rate * output * self.error)  # Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
 
     def __str__(self):
         return f'<{self.name} port>\n' \
                f'- Bias = {self.bias}\n' \
                f'- Weights = {self.weights}\n'
-
-
