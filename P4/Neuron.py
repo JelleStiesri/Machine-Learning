@@ -12,6 +12,7 @@ class Neuron:
     def sigmoid(self, weighted_sum: float):
         return 1 / (1 + e ** -weighted_sum)
 
+
     def activation(self, inputs: list):
         """Dit is de activatiefunctie, hierin word de output van de neuron berekend.
         Hiervoor maken we eerst een gewogen som van alle inputs en voegen hier de bias aan toe.
@@ -22,25 +23,18 @@ class Neuron:
 
         return self.sigmoid(weighted_sum)
 
-    # def calculate_error(self, expectation: [[], bool]):
-    #     for input_list, target in [expectation]:
-    #         derivative = self.activation(input_list) * (1 - self.activation(input_list))
-    #         # print(f'Afgeleide {derivative}\n')
-    #         error = derivative * -(target - self.activation(input_list))
-    #         # print(f'Error: {error}')
-    #
-    #         self.error = error
 
     def calculate_error(self, output: float,  target: float):
         derivative = output * (1 - output)
         error = derivative * -(target - output)
 
         self.error = error
-
-    def update(self, learning_rate: float = 0.1):
+    def update(self, output: float, learning_rate: float = 0.1):
         self.bias -= (learning_rate*self.error)
+        for i in range(len(self.weights)):
+            self.weights[i] -= (learning_rate * output * self.error)
 
-        pass
+
 
     # def update(self, expectations: [[], bool]):
     #     for input_list, expectation in expectations:
