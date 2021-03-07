@@ -1,9 +1,12 @@
 class Perceptron:
 
-    def __init__(self, name: str, bias: float, weights: [float]):
+    def __init__(self, name: str, bias: float, weights: list[float]):
         self.name = name  # Naam heeft geen functionele waarde, is alleen voor overzicht
         self.bias = bias
         self.weights = weights
+
+    def step_function(self, weighted_sum: float):
+        return weighted_sum + self.bias >= 0  # Returnt 1 = True als het getal boven 0 komt.
 
     def activation(self, inputs: list):
         """Dit is de activatiefunctie, hierin word de output van de perceptron berekend.
@@ -14,7 +17,7 @@ class Perceptron:
         for index in range(len(inputs)):  # Loop door indexen van de input lijst heen
             weighted_sum += inputs[index] * self.weights[index]  # Voegt de input waarde*Gewicht toe aan som
 
-        return weighted_sum + self.bias >= 0  # Returnt 1 = True als het getal boven 0 komt.
+        return self.step_function(weighted_sum)
 
     def update(self, expectations: ([], bool), loops: int, learning_rate: float = 0.1):
         """De update functie voert de learning rule uit over het algoritme
