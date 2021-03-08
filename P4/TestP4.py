@@ -22,7 +22,7 @@ def print_table(data, caption):
     print(f'<{caption}>\n {df}\n')
 
 
-N1 = Neuron('Neuron 1', 'Output', -1.2, [0.5, 0.1])
+N1 = Neuron('Neuron 1', -1.2, [0.5, 0.1])
 
 AND_expectations = [[[False, False], False],
                     [[False, True], False],
@@ -39,7 +39,7 @@ print_table(updated_output, 'Uitkomst voor training')
 
 
 
-for i in range(1000):
+for i in range(100000):
     random.shuffle(AND_expectations)
     for input_list, expectation in AND_expectations:
 

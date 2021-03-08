@@ -4,11 +4,10 @@ from typing import List
 
 class Neuron:
 
-    def __init__(self, name: str, neuron_type: str, bias: float, weights: List[float]):
+    def __init__(self, name: str, bias: float, weights: List[float]):
         self.error = None
         self.output = None
         self.name = name
-        self.neuron_type = neuron_type
         self.bias = bias
         self.weights = weights
 
@@ -30,7 +29,6 @@ class Neuron:
         weighted_sum = self.calculate_weighted_sum(self.weights, inputs) + self.bias
 
         output = self.sigmoid(weighted_sum)
-
         self.output = output
         return output
 
@@ -38,18 +36,19 @@ class Neuron:
         return output * (1 - output)  # σ'(inputj) = σ(inputj) ∙ (1 – σ(inputj)) = outputj ∙ (1 – outputj)
 
     def calculate_error_output(self, output: float, target: float):
+        # print(f'')
         error = self.calculate_derivative(output) * -(target - output)  # Δj = σ'(inputj) ∙ –(targetj – outputj)
 
         self.error = error
         return error
 
-    def calculate_error_hidden(self, output: float, prev_weights: List, prev_error: List):
-        error = self.calculate_derivative(output) * self.calculate_weighted_sum(prev_weights, prev_error)
+    def calculate_error_hidden(self, output: float, prev_weights: List, prev_errors: List):
+        error = self.calculate_derivative(output) * self.calculate_weighted_sum(prev_weights, prev_errors)
 
         self.error = error
         return error
 
-    def update(self, output: float, learning_rate: float = 1 ):
+    def update(self, output: float, learning_rate: float = 0.1):
         self.bias -= (learning_rate * self.error)  # Δbj = η ∙ Δj
         for i in range(len(self.weights)):
             self.weights[i] -= (learning_rate * output * self.error)  # Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
