@@ -39,17 +39,23 @@ print_table(updated_output, 'Uitkomst voor training')
 
 
 
-for i in range(10000):
+for i in range(1000):
     random.shuffle(AND_expectations)
     for input_list, expectation in AND_expectations:
 
         output = N1.activation(input_list)
         # print(f'input: {input_list, expectation} --- Output: {output}')
-        N1.calculate_error(output, expectation)
+        N1.calculate_error_output(output, expectation)
         # print('error ',N1.error)
         N1.update(output)
 
         # print('\n')
+
+
+AND_expectations = [[[False, False], False],  # Zodat de tabel niet geshuffled is!!
+                    [[False, True], False],
+                    [[True, False], False],
+                    [[True, True], True]]
 
 updated_output = create_table_data(N1.activation, AND_expectations)
 print_table(updated_output, 'Uitkomst Na Training')
