@@ -59,3 +59,4 @@ AND_expectations = [[[False, False], False],  # Zodat de tabel niet geshuffled i
 
 updated_output = create_table_data(N1.activation, AND_expectations)
 print_table(updated_output, 'Uitkomst Na Training')
+print(N1)

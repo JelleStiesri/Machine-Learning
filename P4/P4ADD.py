@@ -24,12 +24,12 @@ def print_table(data, caption):
     df = pd.DataFrame.from_records(data, columns=columns)
     print(f'<{caption}>\n {df}\n')
 
-N1 = Neuron('Neuron 1', -1.2, [0.6, 0.2])
-N2 = Neuron('Neuron 2', -1.2, [0.6, 0.2])
-N3 = Neuron('Neuron 3', -1.2, [0.6, 0.2])
+N1 = Neuron('Neuron 1', 1, [1, 1])
+N2 = Neuron('Neuron 2', 1, [1, 1])
+N3 = Neuron('Neuron 3', 1, [1, 1])
 
-outputNeuron1 = Neuron('Output Neuron', -1.2, [0.5, 0.1, 1])
-outputNeuron2 = Neuron('Output Neuron', -1.2, [0.5, 0.15, 0.8])
+outputNeuron1 = Neuron('Output Neuron', 1, [1, 1, 1])
+outputNeuron2 = Neuron('Output Neuron', 1, [1, 1, 1])
 
 hiddenLayer = NeuronLayer('Hidden Layer', [N1, N2, N3])
 # outputLayer = NeuronLayer('Output Layer', [outputNeuron])
@@ -79,3 +79,5 @@ print(outputNeuron2, outputNeuron2.output)
 
 # network_xor.feed_forward()
 # network_xor.train(inputs, targets)
+
+print(f'\nNA UPDATE\n{N1}\n\n {N2}\n\n{N3}\n\n {outputNeuron1}\n\n {outputNeuron2}')

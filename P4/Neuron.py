@@ -36,24 +36,40 @@ class Neuron:
         return output * (1 - output)  # σ'(inputj) = σ(inputj) ∙ (1 – σ(inputj)) = outputj ∙ (1 – outputj)
 
     def calculate_error_output(self, output: float, target: float):
-        # print(f'')
+        # print("\n==============================Output Neuron Error==============================")
+        # print(self)
+        # print(f'output: {output} - Target {target}')
+        # print(f'derivative: {self.calculate_derivative(output)}')
+        # print(f'floep: {target - output}')
         error = self.calculate_derivative(output) * -(target - output)  # Δj = σ'(inputj) ∙ –(targetj – outputj)
 
+
+
         self.error = error
+        # print(error)
         return error
 
     def calculate_error_hidden(self, output: float, prev_weights: List, prev_errors: List):
+        # print("\n----------------------Hidden Neuron Error-----------------------------------")
+        # print(self)
+        # print(f'Prev Erro: {prev_errors}')
+        # print(f'Prev Weight: {prev_weights}')
+        # print(self.calculate_weighted_sum(prev_weights, prev_errors))
         error = self.calculate_derivative(output) * self.calculate_weighted_sum(prev_weights, prev_errors)
 
         self.error = error
+        # print(error)
         return error
 
-    def update(self, output: float, learning_rate: float = 0.1):
+    def update(self, prev_outputs: List, learning_rate: float = 10):
         self.bias -= (learning_rate * self.error)  # Δbj = η ∙ Δj
         for i in range(len(self.weights)):
-            self.weights[i] -= (learning_rate * output * self.error)  # Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
+            # print((learning_rate * prev_outputs[i] * self.error))
+            self.weights[i] -= (learning_rate * prev_outputs[i] * self.error)  # Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
 
     def __str__(self):
         return f'<{self.name} port>\n' \
                f'- Bias = {self.bias}\n' \
                f'- Weights = {self.weights}\n'
+
+

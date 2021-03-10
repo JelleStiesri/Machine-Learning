@@ -23,9 +23,9 @@ def print_table(data, caption):
     df = pd.DataFrame.from_records(data, columns=columns)
     print(f'<{caption}>\n {df}\n')
 
-N1 = Neuron('Neuron 1', -1.3, [0.6, 0.2])
-N2 = Neuron('Neuron 2', -1.3, [0.6, 0.2])
-outputNeuron = Neuron('Output Neuron', -1.2, [0.5, 0.1])
+N1 = Neuron('Neuron 1', -1, [1, 1])
+N2 = Neuron('Neuron 2', -1, [0.5, 0.5])
+outputNeuron = Neuron('Output Neuron', 0, [0.6, 1])
 # outputNeuron2 = Neuron('Output Neuron', -1.2, [0.5, 0.1])
 
 hiddenLayer = NeuronLayer('Hidden Layer', [N1, N2])
@@ -35,10 +35,10 @@ outputLayer = NeuronLayer('Output Layer', [outputNeuron])
 network_xor = NeuronNetwork([hiddenLayer, outputLayer])
 print(network_xor)
 
-xor_expectation = [[[False, False], False],
-                   [[False, True], True],
-                   [[True, False], True],
-                   [[True, True], False]]
+xor_expectation = [[[False, False], [False]],
+                   [[False, True], [True]],
+                   [[True, False], [True]],
+                   [[True, True], [False]]]
 
 inputs = [[False, False],
           [False, True],
@@ -58,14 +58,14 @@ print_table(old_output, 'Uitkomst VOOR training')
 # network_xor.feed_forward()
 
 # print(f'\nVOOR UPDATE\n{N1}\n\n {N2}\n\n {outputNeuron}')
-network_xor.train(xor_expectation, 25)
+network_xor.train(xor_expectation, 1000)
 
-xor_expectation = [[[False, False], False],
-                   [[False, True], True],
-                   [[True, False], True],
-                   [[True, True], False]]
+xor_expectation = [[[False, False], [False]],
+                   [[False, True], [True]],
+                   [[True, False], [True]],
+                   [[True, True], [False]]]
 new_output = create_table_data(network_xor.feed_forward, xor_expectation)
 print_table(new_output, 'Uitkomst NA training')
 
 
-# print(f'\nNA UPDATE\n{N1}\n\n {N2}\n\n {outputNeuron}')
+print(f'\nNA UPDATE\n{N1}\n\n {N2}\n\n {outputNeuron}')
