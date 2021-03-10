@@ -14,7 +14,7 @@ class NeuronNetwork:
             input_list = layer.activate(input_list)
         return input_list
 
-    def train(self, dataSet, epochs):
+    def train(self, dataSet, epochs, learning_rate):
         for epoch in range(epochs):
             random.shuffle(dataSet)
 
@@ -72,7 +72,7 @@ class NeuronNetwork:
 
                     for neuron in layer.neurons:
                         # print(prev_outputs)
-                        neuron.update(prev_outputs)
+                        neuron.update(prev_outputs, learning_rate)
 
 
 

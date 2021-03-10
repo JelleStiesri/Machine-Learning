@@ -61,7 +61,7 @@ class Neuron:
         # print(error)
         return error
 
-    def update(self, prev_outputs: List, learning_rate: float = 10):
+    def update(self, prev_outputs: List, learning_rate: float):
         self.bias -= (learning_rate * self.error)  # Δbj = η ∙ Δj
         for i in range(len(self.weights)):
             # print((learning_rate * prev_outputs[i] * self.error))
