@@ -10,6 +10,8 @@ class NeuronNetwork:
         """Loopt door de layers heen en geeft de output van de vorige
         als input voor de volgende."""
         for index in range(len(self.layers)):
+            print("jpoi")
+
             layer = self.layers[index]  # selecteerde de layer
             input_list = layer.activate(input_list)
         return input_list
@@ -47,33 +49,21 @@ class NeuronNetwork:
 
                         hidden_neuron.calculate_error_hidden(hidden_neuron.output, prev_weights, prev_errors)
 
-                # for layer in self.layers:
-                #     for neuron in layer.neurons:
-                #         #OUTPUT VORIGE LAYER
-                #         neuron.update(neuron.output)
-                # H1 H2 H3 Output
-                # Output H3 H2 H1
+
 
                 for layer_index, layer in enumerate(reversed_layers):
-                    # print('\n')
                     if layer_index > len(self.layers)-2:
-                        # print('ohjee')
-                        # print(f'Index {layer_index}')
                         prev_outputs = input_list
                     else:
-                        # print(layer_index, layer.name)
-                        # print(reversed_layers[layer_index+1].name)
                         prev_outputs = []
                         for neuron in reversed_layers[layer_index+1].neurons:
                             prev_outputs.append(neuron.output)
-                    # print(f'prevlayer: {prev_outputs}\n')
 
 
 
                     for neuron in layer.neurons:
-                        # print(prev_outputs)
-                        neuron.update(prev_outputs, learning_rate)
 
+                        neuron.update(prev_outputs, learning_rate)
 
 
 
