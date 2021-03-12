@@ -8,7 +8,6 @@ class NeuronLayer:
     def activate(self, inputs):
         """Deze functie voert de activation functie uit in elke neuron in deze layer"""
         output = []
-
         for neuron in self.neurons:
             output.append(neuron.activation(inputs))
 

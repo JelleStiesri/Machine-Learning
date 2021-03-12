@@ -27,8 +27,8 @@ class Neuron:
     def activation(self, inputs: List):
         """Hier word de gewogen som van de inputs/gewichten berekend en vervolgens de output van de neuron """
         weighted_sum = self.calculate_weighted_sum(self.weights, inputs) + self.bias
-
         output = self.sigmoid(weighted_sum)
+
         self.output = output
         return output
 
@@ -41,7 +41,6 @@ class Neuron:
         error = self.calculate_derivative(output) * -(target - output)  # Δj = σ'(inputj) ∙ –(targetj – outputj)
 
         self.error = error
-
         return error
 
     def calculate_error_hidden(self, output: float, prev_weights: List, prev_errors: List):
@@ -49,7 +48,6 @@ class Neuron:
         error = self.calculate_derivative(output) * self.calculate_weighted_sum(prev_weights, prev_errors)  # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
 
         self.error = error
-
         return error
 
     def update(self, prev_outputs: List, learning_rate: float):
